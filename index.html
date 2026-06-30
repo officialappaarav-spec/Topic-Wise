@@ -1,178 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exam Categories</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Categories</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
 
-body{
-    background:#f3effc;
-    padding:16px;
-    color:#312e81;
-}
+        body{
+            background:#f3effc;
+            padding:16px;
+            color:#312e81;
+        }
 
-.container{
-    max-width:1400px;
-    margin:auto;
-}
+        .container{
+            max-width:1400px;
+            margin:auto;
+        }
 
-.section{
-    background:#fff;
-    border-radius:24px;
-    padding:28px;
-    margin-bottom:24px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.05);
-}
+        .section{
+            background:#fff;
+            border-radius:24px;
+            padding:28px;
+            margin-bottom:24px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.05);
+        }
 
-.section-title{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:20px;
-    font-weight:700;
-    color:#4338ca;
-    margin-bottom:22px;
-}
+        .section-title{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            font-size:20px;
+            font-weight:700;
+            color:#4338ca;
+            margin-bottom:22px;
+        }
 
-.icon{
-    font-size:22px;
-}
+        .icon{
+            font-size:22px;
+        }
 
-.tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-}
+        .tags{
+            display:flex;
+            flex-wrap:wrap;
+            gap:12px;
+        }
 
-.tag{
-    display:inline-block;
-    text-decoration:none;
-    background:#eef0ff;
-    color:#4338ca;
-    padding:12px 20px;
-    border-radius:999px;
-    font-size:15px;
-    font-weight:600;
-    transition:0.25s;
-}
+        .tag{
+            display:inline-block;
+            text-decoration:none;
+            background:#eef0ff;
+            color:#4338ca;
+            padding:12px 20px;
+            border-radius:999px;
+            font-size:15px;
+            font-weight:600;
+            transition:0.25s;
+        }
 
-.tag:hover{
-    background:#4338ca;
-    color:#fff;
-    transform:translateY(-2px);
-}
+        .tag:hover{
+            background:#4338ca;
+            color:#fff;
+            transform:translateY(-2px);
+        }
 
-@media(max-width:768px){
+        @media(max-width:768px){
+            body{ padding:12px; }
+            .section{ padding:20px; border-radius:20px; }
+            .section-title{ font-size:18px; }
+            .tag{ font-size:14px; padding:10px 16px; }
+        }
 
-    body{
-        padding:12px;
-    }
-
-    .section{
-        padding:20px;
-        border-radius:20px;
-    }
-
-    .section-title{
-        font-size:18px;
-    }
-
-    .tag{
-        font-size:14px;
-        padding:10px 16px;
-    }
-}
-
-@media(max-width:480px){
-
-    .tag{
-        font-size:13px;
-        padding:10px 14px;
-    }
-}
-</style>
+        @media(max-width:480px){
+            .tag{ font-size:13px; padding:10px 14px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container" id="categories"></div>
+    <div class="container" id="categories"></div>
 
-<script>
-const categories = [
+    <script>
+        const categories = [
+            {
+                title:"English",
+                icon:"📘",
+                topics:[
+                    {name:"Error Spotting",link:"Error Spotting.html"}
+                ]
+            },
+            {
+                title:"Quantitative Aptitude",
+                icon:"🔢",
+                topics:[
+                    {name:"Percentage",link:"https://example.com/percentage"}
+                ]
+            },
+            {
+                title:"Reasoning",
+                icon:"🧠",
+                topics:[
+                    {name:"Analogy",link:"https://example.com/analogy"}
+                ]
+            },
+            {
+                title:"Current Affairs",
+                icon:"📰",
+                topics:[
+                    {name:"National News",link:"https://example.com/national-news"}
+                ]
+            }
+        ];
 
-{
-    title:"English",
-    icon:"📘",
-    topics:[
-        {name:"Error Spotting",link:"Error Spotting.html"}
-        
-    ]
-},
+        const container = document.getElementById("categories");
 
-{
-    title:"Quantitative Aptitude",
-    icon:"🔢",
-    topics:[
-        {name:"Percentage",link:"https://example.com/percentage"}
-    ]
-},
+        categories.forEach(category => {
+            const section = document.createElement("div");
+            section.className = "section";
 
-{
-    title:"Reasoning",
-    icon:"🧠",
-    topics:[
-        {name:"Analogy",link:"https://example.com/analogy"}
-    ]
-},
+            let topicsHTML = "";
 
-{
-    title:"Current Affairs",
-    icon:"📰",
-    topics:[
-        {name:"National News",link:"https://example.com/national-news"}
-    ]
-}
+            category.topics.forEach(topic => {
+                // Added target="_blank" and rel="noopener noreferrer" here
+                topicsHTML += `
+                    <a href="${topic.link}" class="tag" target="_blank" rel="noopener noreferrer">
+                        ${topic.name}
+                    </a>
+                `;
+            });
 
-];
+            section.innerHTML = `
+                <div class="section-title">
+                    <span class="icon">${category.icon}</span>
+                    <span>${category.title}</span>
+                </div>
+                <div class="tags">
+                    ${topicsHTML}
+                </div>
+            `;
 
-const container = document.getElementById("categories");
-
-categories.forEach(category => {
-
-    const section = document.createElement("div");
-    section.className = "section";
-
-    let topicsHTML = "";
-
-    category.topics.forEach(topic => {
-        topicsHTML += `
-            <a href="${topic.link}" class="tag">
-                ${topic.name}
-            </a>
-        `;
-    });
-
-    section.innerHTML = `
-        <div class="section-title">
-            <span class="icon">${category.icon}</span>
-            <span>${category.title}</span>
-        </div>
-
-        <div class="tags">
-            ${topicsHTML}
-        </div>
-    `;
-
-    container.appendChild(section);
-});
-</script>
-
+            container.appendChild(section);
+        });
+    </script>
 </body>
 </html>
